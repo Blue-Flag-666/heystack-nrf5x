@@ -142,7 +142,7 @@ def main():
     parser.add_argument('output_bin', type=Path, help='Output patched binary file (will also create output ELF file)')
     parser.add_argument('--flash', action='store_true', help='Flash the device after patching.')
     parser.add_argument('--monitor', action='store_true', help='Monitor the device using GDB.')
-    parser.add_argument('--flash-method', choices=['openocd', 'bmp'], default="bmp", help='Method to use for flashing the device.')
+    parser.add_argument('--flash-method', choices=['openocd', 'bmp'], default="openocd", help='Method to use for flashing the device.')
     parser.add_argument('--openocd-config', type=Path, help='Path to OpenOCD configuration file (e.g., openocd.cfg)')
     parser.add_argument('--gdb', default='arm-none-eabi-gdb', help='Path to GDB executable.')
     parser.add_argument('--bmp-port', help='Serial port of the Black Magic Probe GDB server. If not specified, the script will try to find it automatically.')
@@ -199,7 +199,7 @@ def main():
             exit(1)
 
     # Convert the patched binary into an ELF file using objcopy
-    objcopy = 'arm-none-eabi-objcopy'  # Assumes 'arm-none-eabi-objcopy' is in the system's PATH
+    objcopy = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'objcopy')
     try:
         subprocess.run([
             objcopy,

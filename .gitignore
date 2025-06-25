@@ -1,6 +1,8 @@
-/nrf-sdk
-/release
-
+nrf-sdk/
+release/
 ram.bin
 _build/
-
+.venv/
+.vscode/
+/tools/output*
+/output*

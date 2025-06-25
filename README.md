@@ -42,6 +42,14 @@ To begin, download the necessary SDKs and patch them with updates from the nrfx 
 make sdk
 ```
 
+Then install pip, create a venv, activate it and install IntelHex.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install IntelHex
+```
+
 ### Available Makefile Targets
 
 The following Makefile targets are available for compiling the firmware:
@@ -178,6 +186,7 @@ Before patching and flashing the firmware, you need to generate the advertising 
 To generate 50 keys and save them with the prefix `SmallTag1`:
 
 ```bash
+pip install cryptography
 python generate_keys.py -n 50 -p SmallTag1
 ```
 
@@ -196,7 +205,7 @@ The script can be run with the following arguments:
 - **output\_bin**: Path to the output patched binary file (will also create an output ELF file).
 - **--flash**: Flash the device after patching.
 - **--monitor**: Monitor the device using GDB.
-- **--flash-method**: Method to use for flashing the device (`openocd` or `bmp`, default is `bmp`).
+- **--flash-method**: Method to use for flashing the device (`openocd` or `bmp`, default is `openocd`).
 - **--openocd-config**: Path to the OpenOCD configuration file (e.g., `openocd.cfg`).
 - **--gdb**: Path to the GDB executable (default is `arm-none-eabi-gdb`).
 - **--bmp-port**: Serial port of the Black Magic Probe GDB server. If not specified, the script will try to find it automatically.
@@ -206,6 +215,7 @@ The script can be run with the following arguments:
 To patch a binary and flash it to the device using the Black Magic Probe, run:
 
 ```bash
+pip install pyserial
 python3 nrf-patch-log.py ../release/nrf51822_xxac_s130.bin output-SmallTag1/SmallTag1_keyfile ../release/nrf51822_xxac_s130_SmallTag1.bin --flash --flash-method bmp
 ```
 

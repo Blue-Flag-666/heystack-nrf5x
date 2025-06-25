@@ -187,7 +187,7 @@ LIB_FILES += \
 # Optimization flags
 OPT = -Os -g3
 # Uncomment the line below to enable link time optimization
-#OPT += -flto
+OPT += -flto
 
 # C flags common to all targets
 CFLAGS += $(OPT)
@@ -203,7 +203,7 @@ CFLAGS += -DSOFTDEVICE_PRESENT
 CFLAGS += -DSWI_DISABLE0
 CFLAGS += -mcpu=cortex-m4
 CFLAGS += -mthumb -mabi=aapcs
-CFLAGS += -Wall -Werror
+CFLAGS += -Wall
 CFLAGS += -mfloat-abi=soft
 # keep every function in a separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
