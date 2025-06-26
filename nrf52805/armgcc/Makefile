@@ -26,6 +26,9 @@ ifeq ($(HAS_BATTERY), 1)
   ASMFLAGS += -DSAADC_ENABLED=1 -DHAS_BATTERY=1
 endif
 
+CFLAGS += -DMAX_POWER=4
+ASMFLAGS += -DMAX_POWER=4
+
 # Source files common to all targets
 SRC_FILES += \
   $(SDK_ROOT)/modules/nrfx/mdk/gcc_startup_nrf52805.S \
