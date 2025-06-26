@@ -30,7 +30,11 @@ void ble_set_max_tx_power(void)
 {
     uint32_t err_code;
     // Set the transmit power to the maximum allowed by the hardware.
+#ifndef MAX_POWER
     static int8_t max_tx_power = -1;
+#else
+	static int8_t max_tx_power = MAX_POWER;
+#endif
 
     if (max_tx_power == -1) {
         int8_t powers[] = { 8, 7, 6, 5, 4 };  // List of possible power levels
@@ -64,8 +68,13 @@ void ble_set_max_tx_power(void)
         #else
         err_code = sd_ble_gap_tx_power_set(max_tx_power);
         #endif
-        APP_ERROR_CHECK(err_code);
-    }
+
+		if (err_code == NRF_SUCCESS)
+		{
+			COMPAT_NRF_LOG_INFO("ble_set_max_tx_power: %d dBm", max_tx_power);
+		}
+		APP_ERROR_CHECK(err_code);
+	}
 }
 
 /*
