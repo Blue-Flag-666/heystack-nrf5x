@@ -4,5 +4,6 @@ ram.bin
 _build/
 .venv/
 .vscode/
+.idea/
 /tools/output*
 /output*
